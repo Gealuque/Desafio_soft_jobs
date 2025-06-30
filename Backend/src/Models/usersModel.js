@@ -1,4 +1,3 @@
-import { text } from 'express'
 import pool from '../../db/config.js'
 import bcrypt from 'bcryptjs'
 
@@ -17,7 +16,7 @@ export const crearUsuarioModelo = async ({ email, password, rol, lenguage }) => 
 
 export const encontrarUsusarioPorEmailModel = async (email) => {
   const sqlQuery = {
-    text: 'SELECT email, rol, lenguage FROM usuarios WHERE email = $1',
+    text: 'SELECT email, password, rol, lenguage FROM usuarios WHERE email = $1',
     values: [email]
   }
   const respuesta = await pool.query(sqlQuery)
@@ -28,7 +27,7 @@ export const encontrarUsusarioPorEmailModel = async (email) => {
 
 export const obtenerUsuariosModel = async () => {
   const sqlQuery = {
-    text: 'SELECT id, email, rol, lenguge FROM usuarios'
+    text: 'SELECT id, email, rol, lenguage FROM usuarios'
   }
   const respuesta = await pool.query(sqlQuery)
   return respuesta.rows

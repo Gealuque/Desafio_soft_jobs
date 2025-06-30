@@ -14,17 +14,15 @@ export const registrarUsuario = async (req, res) => {
   }
 }
 
-export const obtenerUsuariosEmail = async (req, res) => {
+export const obtenerUsuariosPorToken = async (req, res) => {
   try {
-    const { email } = req.query
-    if (!email) {
-      return res.status(400).json({ error: ' Debe colocar email' })
-    }
+    const email = req.user
     const user = await encontrarUsusarioPorEmailModel(email)
     if (!user) {
-      return res.status(400).json({ error: 'Ususario no encontrado' })
+      return res.status(400).json({ error: 'Usuarios no encontrado' })
     }
-    res.status(200).json(user)
+    delete user.password
+    res.status(200).json([user])
   } catch (error) {
     console.error(error)
     res.status(500).json(error)
