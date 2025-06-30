@@ -1,10 +1,9 @@
 import { encontrarUsusarioPorEmailModel } from '../Models/usersModel.js'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
-
 import 'dotenv/config'
 
-const loginUsuario = async (req, res) => {
+export const loginUsuario = async (req, res) => {
   try {
     const { email, password } = req.body
     const user = await encontrarUsusarioPorEmailModel(email)
@@ -16,12 +15,10 @@ const loginUsuario = async (req, res) => {
       res.status(401).json({ message: 'No se puedo Autenticar' })
     }
     const token = jwt.sign({ email }, process.env.JWTSECRET, {
-      expiresIn: '60s'
+      expiresIn: '10s'
     })
     res.status(200).json({ token })
   } catch (error) {
     res.status(500).json({ message: 'Error al inciar sesión' })
   }
 }
-
-export { loginUsuario }

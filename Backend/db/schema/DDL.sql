@@ -7,3 +7,5 @@ CREATE TABLE usuarios (
     rol VARCHAR(25), 
     lenguage VARCHAR(20) 
     );
+
+    ALTER TABLE usuarios ADD CONSTRAINT unique_email UNIQUE (email);
