@@ -2,6 +2,7 @@ import { text } from 'express'
 import pool from '../../db/config.js'
 import bcrypt from 'bcryptjs'
 
+// Registro
 export const crearUsuarioModelo = async (email, password) => {
   const hashedPassword = bcrypt.hashSync(password)
   const sqlQuery = {
@@ -11,6 +12,8 @@ export const crearUsuarioModelo = async (email, password) => {
   const respuesta = await pool.query(sqlQuery)
   return respuesta.rows[0]
 }
+
+// Inicio Sesión
 
 export const encontrarUsusarioPorEmailModel = async (email) => {
   const sqlQuery = {
