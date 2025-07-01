@@ -5,7 +5,7 @@ import { verificaToken } from '../middleware/verificaToken.middleware.js'
 
 const router = Router()
 
-router.post('/usuarios', crearUsuarioMiddleware, registrarUsuario)
-router.get('/usuarios', verificaToken, obtenerUsuariosPorToken)
+router.post('/', crearUsuarioMiddleware, registrarUsuario)
+router.get('/', verificaToken, obtenerUsuariosPorToken)
 
 export default router
